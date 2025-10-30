@@ -4,7 +4,9 @@
 import { useState, useCallback, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Info, X } from "@phosphor-icons/react";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
+import { addItem, removeItem } from "@/store/cart-slice";
+import { ArrowRight, Info, X, ShoppingCartSimple } from "@phosphor-icons/react";
 import { ProductQuantityControl } from "./ProductQuantityControl";
 
 import {
@@ -118,6 +120,8 @@ export function ProductCard({
   trial_period_days,
   checkoutBaseUrl,
 }: ProductCardComponentProps) {
+  const dispatch = useAppDispatch();
+  const inCart = useAppSelector((s) => s.cart.items.some((i) => i.product_id === product_id));
   const [checkout, setCheckout] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [showDescription, setShowDescription] = useState(false);
@@ -210,7 +214,7 @@ export function ProductCard({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="flex items-center gap-2 mt-5 justify-between"
+            className="flex items-center gap-4 mt-5 justify-between"
           >
             <Button
               onClick={() => {
@@ -224,6 +228,35 @@ export function ProductCard({
               icon={<ArrowRight className="w-5 h-5" />}
             >
               Purchase
+            </Button>
+            <Button
+              onClick={() => {
+                if (inCart) {
+                  dispatch(removeItem({ product_id }));
+                } else {
+                  dispatch(
+                    addItem({
+                      product_id,
+                      name,
+                      price,
+                      description,
+                      discount,
+                      image,
+                      currency,
+                      payment_frequency_count,
+                      pay_what_you_want,
+                      payment_frequency_interval,
+                      trial_period_days,
+                    })
+                  );
+                }
+              }}
+              variant="secondary"
+              size="icon"
+              aria-label={inCart ? "Remove from cart" : "Add to cart"}
+              className="px-3"
+            >
+              <ShoppingCartSimple className="w-5 h-5" weight={inCart ? "fill" : "regular"} />
             </Button>
           </motion.div>
         ) : (

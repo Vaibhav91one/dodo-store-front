@@ -1,11 +1,7 @@
-import {
-  Action,
-  combineSlices,
-  configureStore,
-  ThunkAction,
-} from "@reduxjs/toolkit";
+import { Action, combineSlices, configureStore, ThunkAction } from "@reduxjs/toolkit";
+import { cartSlice } from "./cart-slice";
 
-const rootReducer = combineSlices();
+const rootReducer = combineSlices(cartSlice);
 export const makeStore = () =>
   configureStore({
     reducer: rootReducer,

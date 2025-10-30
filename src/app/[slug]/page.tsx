@@ -9,6 +9,7 @@ import {
   resolveModeFromHost,
 } from "@/lib/server/resolve-storefront";
 import { redirect } from "next/navigation";
+import CartWrapper from "@/components/cart/CartWrapper";
 
 type ProductsResponse = {
   items: Array<{
@@ -141,6 +142,7 @@ export default async function Page({
           </div>
         )}
       </section>
+      {(products.length > 0 || subscriptions.length > 0) && <CartWrapper />}
     </main>
   );
 }

@@ -10,37 +10,58 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  /* config options here */
+  webpack: (config, { dev }) => {
+    // Ignore Lingo output during dev to reduce watcher load and avoid EMFILE
+    if (dev) {
+      const existingIgnored = (() => {
+        const ig = (config.watchOptions as any)?.ignored;
+        if (Array.isArray(ig)) return ig;
+        if (typeof ig === "string") return [ig];
+        return [] as string[];
+      })();
+
+      config.watchOptions = {
+        ...(config.watchOptions || {}),
+        ignored: ["**/src/app/lingo/**", ...existingIgnored],
+      } as any;
+    }
+    return config;
+  },
 };
 
 // Initialize Lingo.dev Compiler for Next.js (App Router under src/app)
-const withLingo = lingoCompiler.next({
-  sourceRoot: "src/app",
-  lingoDir: "lingo",
-  sourceLocale: "en",
-  targetLocales: [
-    "ar",
-    "ca",
-    "de",
-    "zh",
-    "es",
-    "fr",
-    "he",
-    "it",
-    "ja",
-    "nl",
-    "pl",
-    "pt",
-    "sv",
-    "tr",
-  ],
-  rsc: true,
-  useDirective: false,
-  debug: false,
-  models: {
-    "*:*": "openrouter:openai/gpt-4.1-mini",
-  },
-});
+// Disable in dev or when LINGO_DISABLE=1 to avoid network/API requirements
+const disableLingo = process.env.LINGO_DISABLE === "1" || process.env.NODE_ENV !== "production";
+
+const withLingo = disableLingo
+  ? ((cfg: NextConfig) => cfg)
+  : lingoCompiler.next({
+      sourceRoot: "src/app",
+      lingoDir: "lingo",
+      sourceLocale: "en",
+      targetLocales: [
+        "ar",
+        "ca",
+        "de",
+        "zh",
+        "es",
+        "fr",
+        "he",
+        "it",
+        "ja",
+        "nl",
+        "pl",
+        "pt",
+        "sv",
+        "tr",
+      ],
+      rsc: true,
+      useDirective: false,
+      debug: false,
+      models: {
+        "*:*": "openrouter:openai/gpt-4.1-mini",
+      },
+    });
 
 // Only apply Sentry configuration if environment variables are present
 let config = withLingo(nextConfig);

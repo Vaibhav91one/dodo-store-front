@@ -1,6 +1,86 @@
 {
   "version": 0.1,
   "files": {
+    "../components/cart/CartItem.tsx": {
+      "scopes": {
+        "3/declaration/body/2/argument/11-aria-label": {
+          "type": "attribute",
+          "hash": "586bb92d7960b7ef9a1a7e9ab906f081",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Remove item"
+        },
+        "3/declaration/body/2/argument/7/5/1/1-aria-label": {
+          "type": "attribute",
+          "hash": "e0b54684979f62bd0a0c902c7d4df595",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Decrease quantity"
+        },
+        "3/declaration/body/2/argument/7/5/1/5-aria-label": {
+          "type": "attribute",
+          "hash": "e9bf310ce68de171c3e4c18901c4f49f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Increase quantity"
+        }
+      }
+    },
+    "../components/cart/CartSheet.tsx": {
+      "scopes": {
+        "9/declaration/body/8/argument/1/1/1": {
+          "type": "element",
+          "hash": "6f2df536a21749cb3cdb97eb7c5607fe",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Cart ({totalItems} <expression/>)"
+        },
+        "9/declaration/body/8/argument/1/5/1/expression/consequent/3": {
+          "type": "element",
+          "hash": "37a26561fcaeec64280ed1f708f3f5cd",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Your cart is empty"
+        },
+        "9/declaration/body/8/argument/1/5/1/expression/consequent/5": {
+          "type": "element",
+          "hash": "ae0bc53028238123368e5f11af72276d",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Add some products to get started!"
+        },
+        "9/declaration/body/8/argument/1/9/expression/right/3/1": {
+          "type": "element",
+          "hash": "ae69fc06016ffe52ecf38e8855f027e2",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Subtotal"
+        },
+        "9/declaration/body/8/argument/1/9/expression/right/7": {
+          "type": "element",
+          "hash": "b61ee305f311b2fc1096a804d46c50ad",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Checkout"
+        },
+        "9/declaration/body/8/argument/1/9/expression/right/9": {
+          "type": "element",
+          "hash": "48e44d8644dc690e73853e1df30425c7",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Clear cart"
+        }
+      }
+    },
     "../components/footer-pill.tsx": {
       "scopes": {
         "3/0/init/body/0/argument/1/1/1-alt": {
@@ -262,6 +342,18 @@
           "skip": false,
           "overrides": {},
           "content": "You are in Test Mode.<element:Link>Learn More</element:Link>"
+        }
+      }
+    },
+    "../components/ui/sheet.tsx": {
+      "scopes": {
+        "13/0/init/0/body/3/3/3": {
+          "type": "element",
+          "hash": "2c2e22f8424a1031de89063bd0022e16",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Close"
         }
       }
     },
