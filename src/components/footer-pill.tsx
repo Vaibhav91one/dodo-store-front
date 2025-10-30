@@ -1,10 +1,10 @@
-/* eslint-disable @next/next/no-img-element */
 import { cn } from "@/lib/utils";
 
 import Link from "next/link";
 import React from "react";
 import LocaleSwitcher from "./locale-switcher";
 import { Locale } from "@/i18n/config";
+import Image from "next/image";
 
 const FooterPill = ({
   align = "center",
@@ -30,12 +30,14 @@ const FooterPill = ({
       <LocaleSwitcher initialLocale={locale} />
       <Link href="https://dodopayments.com" target="_blank" passHref>
         <div className="flex items-center justify-center bg-bg-secondary  border-border-secondary rounded-lg py-[10px] px-[12px] gap-[6px]">
-          <img
+          <Image
             src="/images/brand-assets/logo/logo.svg"
             alt="logo"
             width={20}
             height={20}
             className="object-cover object-center"
+            placeholder="blur"
+            blurDataURL="/images/brand-assets/logo/logo.svg"
           />
           <p className="text-sm w-full text-nowrap font-light tracking-[-0.22px] font-display">
             Powered by Dodo Payments

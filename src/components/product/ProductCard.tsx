@@ -1,9 +1,9 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useState, useCallback, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import { ArrowRight, Info, X } from "@phosphor-icons/react";
 import { ProductQuantityControl } from "./ProductQuantityControl";
 
@@ -93,10 +93,15 @@ const ProductImage = memo(function ProductImage({
 
   return (
     <div className="relative overflow-hidden aspect-square w-full">
-      <img
+      <Image
         className="rounded-lg z-10 object-cover object-center"
         src={image || "/placeholder.png"}
         alt={name}
+        fill
+        sizes="(max-width: 640px) 100vw, 260px"
+        placeholder="blur"
+        blurDataURL="/placeholder.png"
+        priority={false}
       />
       <DescriptionOverlay />
       <ToggleButton />
