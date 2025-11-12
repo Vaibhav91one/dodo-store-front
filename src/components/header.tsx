@@ -7,9 +7,11 @@ export interface Business {
   name: string;
 }
 
+const IMAGE_PLACEHOLDER = "blur" as const;
+const BLUR_DATA_URL =
+  "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzIiIGhlaWdodD0iNzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjcyIiBoZWlnaHQ9IjcyIiBmaWxsPSIjZGRkIi8+PC9zdmc+" as const;
+
 const Header = ({ business }: { business: Business }) => {
-  
-  
   return (
     <header className="relative w-full">
       <div className="relative h-[35dvh] md:h-[30dvh] w-full">
@@ -20,8 +22,8 @@ const Header = ({ business }: { business: Business }) => {
           sizes="100vw"
           className="object-cover object-center"
           priority
-          placeholder="blur"
-          blurDataURL="/banner.png"
+          placeholder={IMAGE_PLACEHOLDER}
+          blurDataURL={BLUR_DATA_URL}
         />
       </div>
 
@@ -33,8 +35,8 @@ const Header = ({ business }: { business: Business }) => {
             width={72}
             height={72}
             className="object-cover object-center"
-            placeholder="blur"
-            blurDataURL="/images/brand-assets/logo/logo.svg"
+            placeholder={IMAGE_PLACEHOLDER}
+            blurDataURL={BLUR_DATA_URL}
           />
         </div>
 

@@ -6,6 +6,10 @@ import LocaleSwitcher from "./locale-switcher";
 import { Locale } from "@/i18n/config";
 import Image from "next/image";
 
+const IMAGE_PLACEHOLDER = "blur" as const;
+const BLUR_DATA_URL =
+  "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzIiIGhlaWdodD0iNzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjcyIiBoZWlnaHQ9IjcyIiBmaWxsPSIjZGRkIi8+PC9zdmc+" as const;
+
 const FooterPill = ({
   align = "center",
   locale,
@@ -36,8 +40,8 @@ const FooterPill = ({
             width={20}
             height={20}
             className="object-cover object-center"
-            placeholder="blur"
-            blurDataURL="/images/brand-assets/logo/logo.svg"
+            placeholder={IMAGE_PLACEHOLDER}
+            blurDataURL={BLUR_DATA_URL}
           />
           <p className="text-sm w-full text-nowrap font-light tracking-[-0.22px] font-display">
             Powered by Dodo Payments

@@ -1,11 +1,16 @@
 "use client";
 
-import { useState, useCallback, memo } from "react";
+import { useState, useCallback, memo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { ArrowRight, Info, X } from "@phosphor-icons/react";
 import { ProductQuantityControl } from "./ProductQuantityControl";
+
+const IMAGE_PLACEHOLDER = "blur" as const;
+const IMAGE_FALLBACK_SRC = "/placeholder.png" as const;
+const IMAGE_BLUR_DATA_URL =
+  "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzIiIGhlaWdodD0iNzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjcyIiBoZWlnaHQ9IjcyIiBmaWxsPSIjZGRkIi8+PC9zdmc+" as const;
 
 import {
   CurrencyCode,
@@ -49,6 +54,18 @@ const ProductImage = memo(function ProductImage({
   showDescription: boolean;
   onToggleDescription: () => void;
 }) {
+  const [imgSrc, setImgSrc] = useState(image || IMAGE_FALLBACK_SRC);
+
+  useEffect(() => {
+    setImgSrc(image || IMAGE_FALLBACK_SRC);
+  }, [image]);
+
+  const handleImageError = useCallback(() => {
+    setImgSrc((previous) =>
+      previous === IMAGE_FALLBACK_SRC ? previous : IMAGE_FALLBACK_SRC
+    );
+  }, []);
+
   const DescriptionOverlay = () => (
     <AnimatePresence>
       {showDescription && (
@@ -95,13 +112,13 @@ const ProductImage = memo(function ProductImage({
     <div className="relative overflow-hidden aspect-square w-full">
       <Image
         className="rounded-lg z-10 object-cover object-center"
-        src={image || "/placeholder.png"}
+        src={imgSrc}
         alt={name}
         fill
         sizes="(max-width: 640px) 100vw, 260px"
-        placeholder="blur"
-        blurDataURL="/placeholder.png"
-        priority={false}
+        placeholder={IMAGE_PLACEHOLDER}
+        blurDataURL={IMAGE_BLUR_DATA_URL}
+        onError={handleImageError}
       />
       <DescriptionOverlay />
       <ToggleButton />
